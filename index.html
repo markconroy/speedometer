@@ -33,8 +33,11 @@
 
   <script>
     const currentSpeed = document.querySelector('.current-speed');
+    const positionOptions = {
+      enableHighAccuracy: true
+    }
 
-    navigator.geolocation.watchPosition((data) => {
+    navigator.geolocation.watchPosition((data, positionOptions) => {
       console.log(data);
       const speedInKm = data.coords.speed;
       const speedInMetres = speedInKm * 1000;
