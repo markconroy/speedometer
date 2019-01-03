@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Current Speed</title>
+  <meta name="viewport" content="width=device-width">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-color: black;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .current-speed {
+      font-size: 4rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="current-speed">0</div>
+  <div class="units">Minutes/KM</div>
+
+  <script>
+    const currentSpeed = document.querySelector('.current-speed');
+
+    navigator.geolocation.watchPosition((data) => {
+      console.log(data);
+      const speedInKm = data.coords.speed;
+      const speedInMetres = speedInKm * 1000;
+      const distancePerSecond = 3600 / speedInMetres;
+      const secondsPerKm = distancePerSecond * 1000;
+      const minutes = Math.floor(secondsPerKm / 60);
+      const seconds = Math.round(secondsPerKm % 60);
+      const currentSpeedText = minutes + ':' + seconds;
+
+      currentSpeed.textContent = currentSpeedText;
+    }, (error) => {
+      console.error(error);
+      alert('You need to allow location for this to work.');
+    });
+  </script>
+</body>
+
+</html>
