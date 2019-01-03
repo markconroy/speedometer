@@ -28,31 +28,11 @@
 
 <body>
 
-  <div class="current-speed">0</div>
+  <div class="current-speed"></div>
   <div class="units">Minutes/KM</div>
-
-  <script>
-    const currentSpeed = document.querySelector('.current-speed');
-    const positionOptions = {
-      enableHighAccuracy: true
-    }
-
-    navigator.geolocation.watchPosition((data, positionOptions) => {
-      console.log(data);
-      const speedInKm = data.coords.speed;
-      const speedInMetres = speedInKm * 1000;
-      const distancePerSecond = 3600 / speedInMetres;
-      const secondsPerKm = distancePerSecond * 1000;
-      const minutes = Math.floor(secondsPerKm / 60);
-      const seconds = Math.round(secondsPerKm % 60);
-      const currentSpeedText = minutes + ':' + seconds;
-
-      currentSpeed.textContent = currentSpeedText;
-    }, (error) => {
-      console.error(error);
-      alert('You need to allow location for this to work.');
-    });
-  </script>
+  <div class="position position--latitude">Latitude: <span></span></div>
+  <div class="position position--longitude">Longitude: <span></span></div>
+  <script type="text/javascript" src="/js/script.js"></script>
 </body>
 
 </html>
